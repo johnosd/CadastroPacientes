@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  	{% load static %}
+	 <!-- Compiled and minified CSS -->
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <link rel="stylesheet" href="{% static 'nota/css/custom.css' %}">
+
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <meta charset="UTF-8">
+    <title>
+        Comentários
+    </title>
+</head>
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Comenários</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+      </ul>
+    </div>
+  </nav>
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+<ul>
+        <li>
+        <select id="sltmaterial" name="CarroList">
+            <option value="" disabled selected>Choose your option</option>
+            {% for carro in lista %}
+                <option value={{ carro.id }}>{{ carro.marca }}</option>
+            {% endfor %}
+        </select>
+        </li>
+        <li>
+          <input type="text" name="title" placeholder="Post Title" required>
+        </li>
+        <li>
+          <textarea name="content" placeholder="Enter Content" rows=5 cols=50 required>
+          </textarea>
+        </li>
+        <li>
+          <input type="submit">
+        </li>
+      </ul>
+    </form>
+
+</div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+	  <script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+	  <script type="text/javascript">
+        $(".dropdown-button").dropdown({ hover: false });
+         $(document).ready(function() {
+            $('#sltmaterial').material_select();
+            });
+      </script>
+
+
+</body>
+</html>
