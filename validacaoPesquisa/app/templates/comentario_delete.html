@@ -28,13 +28,14 @@
     </div>
   </nav>
     <div class="container">
+        <form method="post">{% csrf_token %}
         <h1>Excluir Comentario</h1>
-        <form method="post" action="http://127.0.0.1:8000/delete/">
-          {% csrf_token %}
-          <input type="hidden" name="pk" value="{{pk}}">
-          <p>Are you sure you want to delete this post?</p>
-          <input type="submit" value="Delete">
+        <h4>Você tem certeza que deseja excluir o comentario:</h4>
+        <h4>"{{comentario.title}}?"</h4>
+        <hr/>
+            <button type="submit" class="btn btn-primary">Excluir</button>
         </form>
+
     </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
