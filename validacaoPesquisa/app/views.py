@@ -55,12 +55,37 @@ def cadastrar_comentario(request,  template_name='cadastrar_comentario.html'):
         title = request.POST['title']
         content = request.POST['content']
         id_carro = request.POST['CarroList']
+        last_update = datetime.now()
         comentario = Comentario(title=title)
         comentario.content = content
         comentario.id_carro = id_carro
+        comentario.last_update = last_update
         comentario.save()
 
         # Get all posts from DB
     comentarios = Comentario.objects
     carro = Carro.objects.all()
     return render(request, template_name, {'Posts': comentarios,'lista':carro})  # context_instance=RequestContext(request))
+
+def listar_comentario(request, pk, template_name='comentario_list.html'):
+    # Get all posts from DB
+    if int(pk) > 0:
+        comentarios = Comentario.objects.filter(id_carro=pk)
+        carro = Carro.objects.get(pk=pk)
+    else:
+        comentarios = Comentario.objects
+        carro = Carro.objects
+    return render(request,template_name, {'Comentarios': comentarios, 'carro': carro})
+
+def remover_comentario(request, pk, template_name='comentario_delete.html'):
+    id = eval("request." + request.method + "['pk']")
+    if request.method == 'POST':
+        comentario = Comentario.objects(id=id)[0]
+        comentario.delete()
+        template = 'index.html'
+        params = {'Posts': Comentario.objects}
+        return redirect('comentario_list')
+    elif request.method == 'GET':
+        template = 'comentario_delete.html'
+        params = {'pk': pk}
+    return render(request, template_name, params)

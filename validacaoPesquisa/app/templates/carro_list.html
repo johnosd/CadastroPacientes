@@ -37,6 +37,10 @@ Listagem de Carros
             <a href="{% url 'remover_carro' pk=carro.pk %}">
                 <i class="material-icons">delete</i>
             </a>
+            <a href="{% url 'comentario_list' pk=carro.pk %}">
+                <i class="material-icons">insert_comment</i>
+            </a>
+
         </td>
     </tr>
 {% endfor %}

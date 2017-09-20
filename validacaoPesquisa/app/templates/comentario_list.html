@@ -1,10 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  	{% load static %}
+	 <!-- Compiled and minified CSS -->
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	  <link rel="stylesheet" href="{% static 'nota/css/custom.css' %}">
+
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <meta charset="UTF-8">
-    <title>lista</title>
+    <title>
+        Comentários
+    </title>
 </head>
 <body>
-lista comentarios
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Comenários</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+      </ul>
+        <div class="col s12">
+        <a href="{% url 'carro_list' %}" class="breadcrumb">Listar Carros</a>
+      </div>
+    </div>
+  </nav>
+<div class="container">
+    <!-- Cycle through entries -->
+    {% for comentario in Comentarios %}
+    <div class="col s12 m7">
+    <h3 class="header">{{ comentario.title }}</h3>
+    <div class="card horizontal">
+      <div class="card-image">
+        <img src="http://lorempixel.com/100/100/people/">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+            <p>{{ comentario.content }}</p>
+            </br>
+            <p>Data: {{ comentario.last_update }}</p>
+        </div>
+        <div class="card-action">
+            <a href="{% url 'remover_comentario' pk=comentario.pk %}">
+                <i class="material-icons">delete</i>
+            </a>
+            <a href="{% url 'remover_comentario' pk=comentario.pk %}">
+                <i class="material-icons">mode_edit</i>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    <a href="{% url 'comentarios'%}" class="btn btn-primary">
+    Cadastrar Comentario
+</a>
+    </div>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+	  <script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+	  <script type="text/javascript">
+        $(".dropdown-button").dropdown({ hover: false });
+         $(document).ready(function() {
+            $('#sltmaterial').material_select();
+            });
+      </script>
+
+
 </body>
 </html>

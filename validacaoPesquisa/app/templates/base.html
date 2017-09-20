@@ -15,6 +15,9 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo center">Revenda de carros</a>
       <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a href="{% url 'carro_list' %}" class="breadcrumb">Listar Carros</a></li>
+          <li><a href="{% url 'cadastrar_carro' %}" class="breadcrumb">Cadastrar Carros</a></li>
+          <li><a href="{% url 'comentarios' %}" class="breadcrumb">Cadastrar Comentários</a></li>
       </ul>
     </div>
   </nav>

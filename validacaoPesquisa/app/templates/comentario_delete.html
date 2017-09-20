@@ -27,32 +27,15 @@
         </div>
     </div>
   </nav>
-<div class="container">
-    <form method="post">
-        {% csrf_token %}
-<ul>
-        <li>
-        <select id="sltmaterial" name="CarroList">
-            <option value="" disabled selected>Choose your option</option>
-            {% for carro in lista %}
-                <option value={{ carro.id }}>{{ carro.marca }}</option>
-            {% endfor %}
-        </select>
-        </li>
-        <li>
-          <input type="text" name="title" placeholder="Post Title" required>
-        </li>
-        <li>
-          <textarea name="content" placeholder="Enter Content" rows=5 cols=50 required>
-          </textarea>
-        </li>
-        <li>
-          <input type="submit">
-        </li>
-      </ul>
-    </form>
-
-</div>
+    <div class="container">
+        <h1>Excluir Comentario</h1>
+        <form method="post" action="http://127.0.0.1:8000/delete/">
+          {% csrf_token %}
+          <input type="hidden" name="pk" value="{{pk}}">
+          <p>Are you sure you want to delete this post?</p>
+          <input type="submit" value="Delete">
+        </form>
+    </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
