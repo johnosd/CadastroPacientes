@@ -61,11 +61,12 @@ def cadastrar_comentario(request,  template_name='cadastrar_comentario.html'):
         comentario.id_carro = id_carro
         comentario.last_update = last_update
         comentario.save()
-
+        pk = 0
+        return redirect('comentario_list', pk)
         # Get all posts from DB
     comentarios = Comentario.objects
     carro = Carro.objects.all()
-    return render(request, template_name, {'Posts': comentarios,'lista':carro})  # context_instance=RequestContext(request))
+    return render(request, template_name, {'Posts': comentarios, 'lista':carro})  # context_instance=RequestContext(request))
 
 def listar_comentario(request, pk, template_name='comentario_list.html'):
     # Get all posts from DB
@@ -85,3 +86,21 @@ def remover_comentario(request, pk, template_name='comentario_delete.html'):
         return redirect('comentario_list',pk)
     return render(request, template_name, {'comentario': comentario})
 
+def editar_comentario(request, pk, template_name='cadastrar_comentario.html'):
+    comentario = Comentario.objects.get(id=pk)
+    if request.method == 'POST':
+        title = request.POST['title']
+        content = request.POST['content']
+        id_carro = request.POST['CarroList']
+        last_update = datetime.now()
+        comentario = Comentario(title=title)
+        comentario.content = content
+        comentario.id_carro = id_carro
+        comentario.last_update = last_update
+        comentario.save()
+        pk = 0
+        return redirect('comentario_list', pk)
+
+    comentarios = Comentario.objects
+    carro = Carro.objects.all()
+    return render(request, template_name, {'comentario': comentario,'lista':carro})

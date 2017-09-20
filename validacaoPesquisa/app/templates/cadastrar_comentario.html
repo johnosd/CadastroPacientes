@@ -7,7 +7,7 @@
 
 
 	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	  <link rel="stylesheet" href="{% static 'nota/css/custom.css' %}">
+	  <!--<link rel="stylesheet" href="{% static 'nota/css/custom.css' %}">-->
 
 	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -40,14 +40,22 @@
         </select>
         </li>
         <li>
-          <input type="text" name="title" placeholder="Post Title" required>
+            <div class = "input-field col s6">
+                  <i class = "medium material-icons prefix">account_box</i>
+                  <input placeholder = "Titulo Comentario" name="title" value = "{{ comentario.title }}" id = "name"
+                     type = "text" class = "active validate" required />
+                  <label for = "name">Comentario Titulo</label>
+            </div>
         </li>
         <li>
-          <textarea name="content" placeholder="Enter Content" rows=5 cols=50 required>
-          </textarea>
+            <div class = "input-field col s6">
+                  <i class = "medium material-icons prefix">comment</i>
+                <textarea id = "content" placeholder="Enter Content" class = "materialize-textarea">{{ comentario.content }}</textarea></textarea>
+            <label for = "name">Comentario Titulo</label>
+            </div>
         </li>
         <li>
-          <input type="submit">
+          <input type="submit" class="btn btn-primary">
         </li>
       </ul>
     </form>
@@ -56,12 +64,15 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
-	  <script src="{% static 'jquery-3.2.1.min.js' %}"></script>
-	  <script type="text/javascript">
+  <!--<script src="{% static 'jquery-3.2.1.min.js' %}"></script>-->
+  <script type="text/javascript">
         $(".dropdown-button").dropdown({ hover: false });
-         $(document).ready(function() {
+        $(document).ready(function() {
+            console.log("{{lista.id_carro}}");
             $('#sltmaterial').material_select();
-            });
+        });
+
+        $("#sltmaterial").val({{comentario.id_carro}});
       </script>
 
 
