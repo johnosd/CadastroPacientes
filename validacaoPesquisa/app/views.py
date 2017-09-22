@@ -11,6 +11,10 @@ class CarroForm(ModelForm):
         model = Carro
         fields = ['modelo', 'marca', 'ano', 'valor', 'data_cadastro']
 
+def home(request):
+    carro = Carro.objects.all()
+    carros = {'lista': carro}
+    return render(request, 'carro_list.html', carros)
 
 def cadastrar_carro(request, template_name='carro_form.html'):
     form = CarroForm(request.POST or None)
@@ -49,9 +53,11 @@ def remover_carro(request, pk, template_name='carro_delete.html'):
         return redirect('carro_list')
     return render(request, template_name, {'carro': carro})
 
-def cadastrar_comentario(request,  template_name='cadastrar_comentario.html'):
+def cadastrar_comentario(request, template_name='cadastrar_comentario.html'):
+
     if request.method == 'POST':
         # save new postdir
+
         title = request.POST['title']
         content = request.POST['content']
         id_carro = request.POST['CarroList']
@@ -92,8 +98,9 @@ def editar_comentario(request, pk, template_name='cadastrar_comentario.html'):
         title = request.POST['title']
         content = request.POST['content']
         id_carro = request.POST['CarroList']
+
         last_update = datetime.now()
-        comentario = Comentario(title=title)
+        comentario.title = title
         comentario.content = content
         comentario.id_carro = id_carro
         comentario.last_update = last_update
